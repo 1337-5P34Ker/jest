@@ -1,0 +1,30 @@
+{
+  "name": "jest-testing",
+  "version": "1.0.0",
+  "description": "Testing with JEST - a beginner's guide",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1337-5P34Ker/jest.git"
+  },
+  "keywords": [
+    "JEST",
+    "Testing",
+    "Javascript"
+  ],
+  "author": "Rocco Hundertmark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1337-5P34Ker/jest/issues"
+  },
+  "homepage": "https://github.com/1337-5P34Ker/jest#readme",
+  "devDependencies": {
+    "jest": "^25.1.0"
+  },
+  "dependencies": {
+    "@types/jest": "^25.1.4"
+  }
+}
