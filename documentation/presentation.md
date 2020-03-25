@@ -135,4 +135,24 @@ The serialized objects (e.g. HTML, JSON...) are stored in files in a special fol
 ![Snapshotsfolder](snapshot.png)
 
  
+---
+
+#### Coverage
+
+```js
+jest --coverage
+```
+
+Jest shows a table to visualize the code coverage.
+![Code coverage](coverage.png)
+
+--
+
+And it also creates a complete (linked) HTML report.
+![Code coverage](coverage_html_master.png)
+
+--
+
+![Code coverage](coverage_html_detail.png)
+
 
