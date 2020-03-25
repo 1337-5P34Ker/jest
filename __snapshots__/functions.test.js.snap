@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests for people getWomen returns women 1`] = `
+Array [
+  Object {
+    "age": 30,
+    "gender": "female",
+    "name": "Padme Amidala",
+  },
+]
+`;

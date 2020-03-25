@@ -109,3 +109,30 @@ test('adds 1 + 2 to equal 3', () => {
 
 ![result](result1.png)
 
+---
+
+#### Snapshots 
+
+Jest creates snapshots from all serializable objects to compare with.
+
+![matchSnapshot](matchSnapshot.png)
+
+--
+
+The serialized objects (e.g. HTML, JSON...) are stored in files in a special folder 
+
+![Snapshotsfolder](snapshots.png)
+
+--
+
+ If snapshot is not matching...
+
+ ![Replace snapshot?](replaceSnapshot.png)
+
+--
+
+// functions.test.js.snap
+![Snapshotsfolder](snapshot.png)
+
+ 
+
