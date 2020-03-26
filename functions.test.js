@@ -93,6 +93,14 @@ describe('tests for strings', () => {
 
         expect('Christoph').toMatch(/stop/);
     });
+
+    test('reverseString exists in functions', () => {
+        expect(functions.reverseString).toBeDefined()
+    })
+
+    test('reverseStrings reverses a string', () => {
+        expect(functions.reverseString('abc')).toEqual('cba')
+    });
 })
 
 describe('tests for arrays and iterables', () => {

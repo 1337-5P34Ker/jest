@@ -23,7 +23,14 @@ const functions = {
     getTodos: () =>
         axios.get('https://jsonplaceholder.typicode.com/todos/1')
         .then(response => response.data)
-        .catch(error => 'error')
+        .catch(error => 'error'),
+    reverseString: (input) => {
+        result = input
+            .split('')
+            .reverse()
+            .join('');
+        return result;
+    }
 
 }
 
