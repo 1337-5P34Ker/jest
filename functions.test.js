@@ -170,3 +170,29 @@ describe('fetch data from an API', () => {
         expect(toDo.title).toEqual(expectedToDo.title)
     })
 })
+
+// Mocking
+
+describe('testing with mocked functions', () => {
+
+    test('test is calling the mocked callback', () => {
+        
+        const mockedCallback = jest.fn(x => x + 5);
+        console.log(mockedCallback)
+        // > undefined
+        functions.forEach([0, 1, 2], mockedCallback)
+
+        // function was called 3 times
+        expect(mockedCallback).toBeCalledTimes(3);
+
+        // the first argument of the first call was 0
+        expect(mockedCallback.mock.calls[0][0]).toBe(0);
+
+        // The first argument of the second call was 1
+        expect(mockedCallback.mock.calls[1][0]).toBe(1);
+
+        // The return value of the first call was 6 (1 + 5)
+        expect(mockedCallback.mock.results[1].value).toBe(6);
+    })
+
+})
