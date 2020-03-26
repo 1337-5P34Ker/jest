@@ -103,28 +103,62 @@ describe('tests for arrays and iterables', () => {
         'stay home',
         'have fun',
         'survive',
-      ];
-      
-      test('the todos contains stay home', () => {
+    ];
+
+    test('the todos contains stay home', () => {
 
         expect(todos).toContain('stay home');
         expect(new Set(todos)).toContain('stay home');
-      });
+    });
 })
 
 describe('tests for exceptions', () => {
 
     function buyToiletPaper() {
         throw new Error('404 not found');
-      }
-      
-      test('buy toilet paper throws an exception', () => {
+    }
+
+    test('buy toilet paper throws an exception', () => {
 
         expect(buyToiletPaper).toThrow();
         expect(buyToiletPaper).toThrow(Error);
-      
+
         // You can also use the exact error message or a regexp
         expect(buyToiletPaper).toThrow('404 not found');
         expect(buyToiletPaper).toThrow(/404/);
-      });
+    });
+})
+
+// async
+describe('fetch data from an API', () => {
+    beforeEach(() => {
+
+        expectedToDo = {
+            "userId": 1,
+            "id": 1,
+            "title": "delectus aut autem",
+            "completed": false
+        }
+    });
+
+    test('get todos get a todo like expected', () => {
+
+        // with a promise
+        expect.assertions(2); // ToDo: why 2?
+        return functions.getTodos()
+            .then(toDo => {
+                expect(toDo.completed).toBeFalsy()
+                expect(toDo.title).toEqual(expectedToDo.title)
+            });
+    })
+
+
+    test('get todos get a todo like expected as async', async () => {
+
+        // with async/await
+        expect.assertions(2); // ToDo: why 2?
+        const toDo = await functions.getTodos();
+        expect(toDo.completed).toBeFalsy()
+        expect(toDo.title).toEqual(expectedToDo.title)
+    })
 })
