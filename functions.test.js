@@ -176,11 +176,12 @@ describe('fetch data from an API', () => {
 describe('testing with mocked functions', () => {
 
     test('test is calling the mocked callback', () => {
-        
         const mockedCallback = jest.fn(x => x + 5);
         console.log(mockedCallback)
         // > undefined
-        functions.forEach([0, 1, 2], mockedCallback)
+
+        const values = [0, 1, 2];
+        values.forEach(mockedCallback);
 
         // function was called 3 times
         expect(mockedCallback).toBeCalledTimes(3);

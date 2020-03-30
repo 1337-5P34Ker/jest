@@ -155,4 +155,40 @@ And it also creates a complete (linked) HTML report.
 
 ![Code coverage](coverage_html_detail.png)
 
+---
 
+#### Mocking
+
+Mocking is very useful to test function calls. To check the invocation with its parameters and return values. And also to mock return values.
+
+```js
+const myMock = jest.fn()
+// Fake return values for call 1, 2 and all others
+myMock.mockReturnValueOnce(42)
+      .mockReturnValueOnce('Darth Vader')
+      .mockReturnValue(true);
+
+console.log(myMock(), myMock(), myMock(), myMock());
+// > 42, 'Darth Vader', true, true
+```
+
+--
+
+```js
+const myMock = jest.fn(x => x + 5);
+console.log(myMock)
+  // > undefined
+
+const values = [0, 1, 2];
+values.forEach(myMock);
+
+// function was called 3 times
+expect(myMock).toBeCalledTimes(3);
+
+ // the first argument of the first call was 0
+expect(myMock.mock.calls[0][0]).toBe(0);
+
+ // The return value of the first call was 6 (1 + 5)
+expect(myMock.mock.results[1].value).toBe(6);
+
+```
