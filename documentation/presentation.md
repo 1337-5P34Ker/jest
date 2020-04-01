@@ -39,21 +39,68 @@ npm install --save @types/jest
 ```
 ---
 
-#### Syntax ("matchers")
+#### Syntax (Matchers)
 
 more than 50 matchers avail.
 (https://jestjs.io/docs/en/using-matchers)
 ```js
- expect(value)
- .toBe(value)
- .toHaveBeenCalled()
- .toBeDefined()
- .toBeFalsy()
- .toContain(item)
- .toEqual(value)
- .toMatch(regExp)
+// Common
+.toBe(value)
+.toEqual(value)
+...
+// Truthiness
+.toBeDefined()
+.toBeFalsy()
+...
+// Numbers
+.toBeGreaterThan(3);
+.toBeGreaterThanOrEqual(3.5);
+.toBeLessThan(5);
+...
+// Strings
+.toMatch(regExp)
+...
+// Arrays and iterables
+.toContain()
+...
+// Exceptions
+.toThrow('Yoda is not a Sith');
+.toThrow(/JEDI/); // any error with 'JEDI'
+...
+// Mocks
+ .toHaveBeenCalled() 
+ .toHaveBeenCalledWith(arg1, arg2);
  ...
 ```
+
+--
+
+#### Syntax (Methods)
+
+
+```js
+
+ describe('description for this tests', () => {
+    beforeAll('runs before tests in this describe-block run' () => {
+   // clear DB
+    })
+
+    beforeEach('runs before each test runs' () => {
+   // set init values
+    })
+
+    afterEach(fn, timeout)...
+    afterAll(fn, timeout)...
+    test(name, fn)
+    test.only()
+    test.skip()
+    test.each([])
+    test.todo('Yes, I will...')
+    ...
+ })
+
+```
+
 ---
 
 
