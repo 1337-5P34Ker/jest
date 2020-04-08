@@ -221,6 +221,8 @@ console.log(myMock(), myMock(), myMock(), myMock());
 
 --
 
+Mocking a function
+
 ```js
 const myMock = jest.fn(x => x + 5);
 console.log(myMock)
@@ -235,7 +237,27 @@ expect(myMock).toBeCalledTimes(3);
  // the first argument of the first call was 0
 expect(myMock.mock.calls[0][0]).toBe(0);
 
- // The return value of the first call was 6 (1 + 5)
+ // The return value of the second call was 6 (1 + 5)
 expect(myMock.mock.results[1].value).toBe(6);
+
+```
+
+--
+
+Mocking a timer
+
+```js
+// fake setTimeout
+  jest.useFakeTimers();
+  const callback = jest.fn();
+
+  functions.waitASecond(callback);
+  
+  expect(setTimeout).toHaveBeenCalledTimes(1);
+  expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 10000);
+  expect(callback).not.toHaveBeenCalled();
+ 
+  jest.runAllTimers(); // time is over
+  expect(callback).toHaveBeenCalled(); // callback is called
 
 ```

@@ -22,8 +22,8 @@ const functions = {
     },
     getTodos: () =>
         axios.get('https://jsonplaceholder.typicode.com/todos/1')
-        .then(response => response.data)
-        .catch(error => 'error'),
+            .then(response => response.data)
+            .catch(error => 'error'),
     reverseString: (input) => {
         result = input
             .split('')
@@ -35,8 +35,16 @@ const functions = {
         for (let index = 0; index < items.length; index++) {
             callback(items[index]);
         }
+    },
+    waitASecond: (callback) => {
+        console.log('go');
+        setTimeout(function () {
+            console.log('stop in real-time');
+            callback();
+        }, 10000);
     }
 
 }
 
 module.exports = functions;
+

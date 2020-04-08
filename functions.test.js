@@ -1,25 +1,26 @@
 const functions = require('./functions');
 
 var people = [];
+jest.useFakeTimers();
 
 describe('tests for people', () => {
 
     beforeEach(() => {
         people = [{
-                name: 'Rocco',
-                age: 48,
-                gender: 'male'
-            },
-            {
-                name: 'Yoda',
-                age: 800,
-                gender: 'male'
-            },
-            {
-                name: 'Padme Amidala',
-                age: 30,
-                gender: 'female'
-            },
+            name: 'Rocco',
+            age: 48,
+            gender: 'male'
+        },
+        {
+            name: 'Yoda',
+            age: 800,
+            gender: 'male'
+        },
+        {
+            name: 'Padme Amidala',
+            age: 30,
+            gender: 'female'
+        },
         ];
     });
 
@@ -192,6 +193,17 @@ describe('testing with mocked functions', () => {
 
         // The return value of the first call was 6 (1 + 5)
         expect(mockedCallback.mock.results[1].value).toBe(6);
+    })
+
+
+    test('the setTimeout should be called 1x after 10s', () => {
+        const callback = jest.fn();
+        functions.waitASecond(callback);
+        expect(setTimeout).toHaveBeenCalledTimes(1);
+        expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 10000);
+        expect(callback).not.toHaveBeenCalled();
+        jest.runAllTimers();
+        expect(callback).toHaveBeenCalled();
     })
 
 })
