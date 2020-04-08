@@ -261,3 +261,63 @@ Mocking a timer
   expect(callback).toHaveBeenCalled(); // callback is called
 
 ```
+
+--
+
+Mocking a module (e.g. fs API)
+
+To mock a complete module you have to create its fake inside the \_\_mocks\_\_ directory and to implement the desired functionality.
+While running the test, the fake implementation is used.
+
+// \_\_mocks\_\_/fs.js
+```js
+// fake module nodes fs API
+// used instead of the original fs.readFileSync()
+function readFileSync(filePath) { 
+    return mockFile[filePath] || '';
+}
+
+fs.readFileSync = readFileSync;
+
+module.exports = fs;
+
+```
+
+--
+
+
+// fileFunctions.js
+```js
+const fs = require('fs'); // original fs in prod mode
+
+function getContent(path) {
+  return fs.readFileSync(path);
+}
+
+exports.getContent = getContent;
+```
+
+--
+
+
+// fileFunctions.test.js
+```js
+const fileFunctions = require('./fileFunctions');
+jest.mock('fs'); // fake fs from __mocks__
+
+describe('file access to mocked file system', () => {
+  const MOCK_FILE_CONTENT = 
+  {'/path/2/another.txt': 'some text'}
+
+  beforeEach(() => {
+    // set up a fake file
+    require('fs').__setMockFileContent(MOCK_FILE_CONTENT);
+  });
+
+  test('content of file is correct', () => {    
+    const content = fileFunctions.getContent('/path/2/another.txt');
+    expect(content).toBe('some text');
+  });
+})
+
+```
