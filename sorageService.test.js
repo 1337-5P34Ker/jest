@@ -16,12 +16,10 @@ const mockHeroes = [{
 describe('Tests mit dem StorageService', () => {
 
     beforeAll(() => {
-        console.log('called only once');
         storageService = new StorageService();        
     });
 
     beforeEach(() => {
-        console.log('called for each test');
         storageService.clearAll();
     })
 

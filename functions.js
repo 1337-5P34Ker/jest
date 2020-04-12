@@ -37,13 +37,14 @@ const functions = {
         }
     },
     waitASecond: (callback) => {
-        console.log('go');
         setTimeout(function () {
-            console.log('stop in real-time');
             callback();
         }, 10000);
-    }
-
+    },
+    getUser: () =>
+        axios.get('https://jsonplaceholder.typicode.com/users/1')
+            .then(response => response.data)
+            .catch(error => 'error')
 }
 
 module.exports = functions;
