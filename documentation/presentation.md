@@ -105,7 +105,7 @@ more than 50 matchers avail.
 
 
 
-## Testing
+#### Testing
 
 // package.json
 ```js
@@ -178,7 +178,7 @@ The serialized objects (e.g. HTML, JSON...) are stored in files in a special fol
 
 --
 
-// functions.test.js.snap
+// functions.**_test_**.js.**_snap_**
 ![Snapshotsfolder](snapshot.png)
 
  
@@ -300,7 +300,7 @@ exports.getContent = getContent;
 --
 
 
-// fileFunctions.test.js
+// fileFunctions.**_test_**.js
 ```js
 const fileFunctions = require('./fileFunctions');
 jest.mock('fs'); // fake fs from __mocks__
@@ -321,3 +321,45 @@ describe('file access to mocked file system', () => {
 })
 
 ```
+
+---
+
+
+
+#### DOM Manipulation
+
+DOM manipulation is not so tricky as feared using jQuery
+
+```js
+// displayUser.js
+const functions = require('./functions');
+const $ = require('jquery');
+
+$('#button').on('click', () => {
+  functions.getUser(user => {     
+    const loggedText = 'Logged ' + (user.name ? 'In' : 'Out');
+    $('#username').text(user.name + ' - ' + loggedText);
+  });
+});
+```
+--
+
+Test 
+
+```js
+// displayUser.test.js
+test('Displays Leanne Graham in username after a click', () => {
+    // Set up our document body
+    document.body.innerHTML =
+    '<div><span id="username" /><button id="button" /></div>';
+    const functions = require('./functions');
+    const $ = require('jquery');
+
+    $('#button').click(); // Use jquery to click
+    window.setTimeout(function () {
+        expect($('#username').text())
+        .toEqual('Leanne Graham - Logged In');
+    }, 3000);
+});
+```
+
