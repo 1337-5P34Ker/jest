@@ -207,3 +207,58 @@ describe('testing with mocked functions', () => {
     })
 
 })
+
+
+expect.extend({
+    toBeJedi(received) {
+        const pass = ['Yoda', 'Obi-Wan Kenobi', 'Mace Windu', 'Qui-Gon Jinn', 'Rey', 'Luke Skywalker', 'Anakin Skywalker'].indexOf(received) != -1;
+        if (pass) {
+            return {
+                message: () =>
+                    `expected ${received} shouldn't be a Jedi.`,
+                pass: true,
+            };
+        } else {
+            return {
+                message: () =>
+                    `expected ${received} should be a Jedi`,
+                pass: false,
+            };
+        }
+    },
+});
+
+describe.only("Check for Jedi", () => {
+
+    // Test with an array of test values
+    const characters = [
+        ['Yoda', true],
+        ['Darth Vader', false],
+        ['Luke Skywalker', true]
+    ];
+
+    test('Yoda is a Jedi but Darth Vader is not', () => {
+        expect('Yoda').toBeJedi();
+        expect('Darth Vader').not.toBeJedi();
+        expect({ jedi: 'Luke Skywalker', sith: 'Darth Maul' })
+            .toEqual({
+                jedi: expect.toBeJedi(),
+                sith: expect.not.toBeJedi(),
+            });
+    });
+
+    // Test iterates over all characters
+    test.each(characters)(
+        'Jedi should be detected',
+        (character, expectedResult) => {
+            switch (expectedResult) {
+                case true:
+                    expect(character).toBeJedi();
+                    break;
+                case false:
+                    expect(character).not.toBeJedi();
+                    break;
+            }
+        }
+    );
+});
