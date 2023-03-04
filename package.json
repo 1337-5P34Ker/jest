@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/1337-5P34Ker/jest#readme",
   "devDependencies": {
-    "jest": "^25.1.0"
+    "jest": "^29.4.3"
   },
   "dependencies": {
     "@types/jest": "^25.1.4",
